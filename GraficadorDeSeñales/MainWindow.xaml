@@ -21,7 +21,7 @@
         <TextBox x:Name="txtTiempoInicial" HorizontalAlignment="Left" Height="23" Margin="163,51,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="txtTiempoFinal" HorizontalAlignment="Left" Height="23" Margin="163,95,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btnGraficar" Content="Graficar" HorizontalAlignment="Left" Margin="312,94,0,0" VerticalAlignment="Top" Width="75" Click="BtnGraficar_Click"/>
-        <ScrollViewer HorizontalAlignment="Left" Height="238" Margin="10,171,0,0" VerticalAlignment="Top" Width="772" HorizontalScrollBarVisibility="Visible">
+        <ScrollViewer x:Name="scrGrafica" HorizontalAlignment="Left" Height="238" Margin="10,171,0,0" VerticalAlignment="Top" Width="772" HorizontalScrollBarVisibility="Visible">
             <Polyline Stroke="CornflowerBlue" StrokeThickness="2" Name="plnGrafica"/>
         </ScrollViewer>
         <TextBlock HorizontalAlignment="Left" Margin="163,127,0,0" TextWrapping="Wrap" Text="Frecuencia de muestreo:" VerticalAlignment="Top"/>

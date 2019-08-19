@@ -44,7 +44,7 @@ namespace GraficadorDeSeñales
             for (double i = tiempoInicial; i <= tiempoFinal; i += periodoMuestreo)
             {
                 plnGrafica.Points.Add(
-                    new Point( i, señalSenoidal.evaluar(i))
+                    new Point( i * scrGrafica.Width, -1 * (señalSenoidal.evaluar(i) * scrGrafica.Height / 2.0))
                     );
             }
         }

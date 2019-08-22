@@ -44,14 +44,22 @@ namespace GraficadorDeSeñales
             for (double i = tiempoInicial; i <= tiempoFinal; i += periodoMuestreo)
             {
                 plnGrafica.Points.Add(
-                    adaptarCoordenadas(i, señalSenoidal.evaluar(i))
+                    adaptarCoordenadas(i, señalSenoidal.evaluar(i), tiempoInicial)
                     );
             }
+
+            plnEjeX.Points.Clear();
+            plnEjeX.Points.Add(
+                adaptarCoordenadas(tiempoInicial, 0.0, tiempoInicial)
+                );
+            plnEjeX.Points.Add(
+                adaptarCoordenadas(tiempoFinal, 0.0, tiempoInicial)
+                );
         }
 
-        public Point adaptarCoordenadas(double x, double y)
+        public Point adaptarCoordenadas(double x, double y, double tiempoInicial)
         {
-            return new Point(x * scrGrafica.Width, -1 * ( y * ( ( scrGrafica.Height / 2.0) - 25) ) + ( scrGrafica.Height / 2.0 ) );
+            return new Point((x - tiempoInicial) * scrGrafica.Width, -1 * ( y * ( ( scrGrafica.Height / 2.0) - 25) ) + ( scrGrafica.Height / 2.0 ) );
         }
     }
 }

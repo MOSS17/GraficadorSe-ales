@@ -43,9 +43,14 @@ namespace GraficadorDeSeñales
 
             for (double i = tiempoInicial; i <= tiempoFinal; i += periodoMuestreo)
             {
-                plnGrafica.Points.Add(
-                    adaptarCoordenadas(i, señalSenoidal.evaluar(i), tiempoInicial)
-                    );
+                Muestra muestra = new Muestra(i,
+                    señalSenoidal.evaluar(i));
+                señalSenoidal.Muestras.Add(muestra);
+            }
+
+            foreach(Muestra muestra in señalSenoidal.Muestras)
+            {
+                plnGrafica.Points.Add(adaptarCoordenadas(muestra.X, muestra.Y, tiempoInicial));
             }
 
             plnEjeX.Points.Clear();

@@ -34,9 +34,12 @@ namespace GraficadorDeSeñales
             double tiempoInicial = double.Parse(txtTiempoInicial.Text);
             double tiempoFinal = double.Parse(txtTiempoFinal.Text);
             double frecuenciaDeMuestreo = double.Parse(txtFrecuenciaDeMuestreo.Text);
-            
 
-            SeñalSenoidal señalSenoidal = new SeñalSenoidal(amplitud, fase, frecuencia);
+            /*
+            SeñalSenoidal señal = new SeñalSenoidal(amplitud, fase, frecuencia);
+            */
+
+            SeñalParabolica señal = new SeñalParabolica();
 
             double periodoMuestreo = 1.0 / frecuenciaDeMuestreo;
 
@@ -46,7 +49,7 @@ namespace GraficadorDeSeñales
 
             for (double i = tiempoInicial; i <= tiempoFinal; i += periodoMuestreo)
             {
-                double valorMuestra = señalSenoidal.evaluar(i);
+                double valorMuestra = señal.evaluar(i);
 
                 if(Math.Abs(valorMuestra) > amplitudMaxima)
                 {
@@ -55,10 +58,10 @@ namespace GraficadorDeSeñales
 
                 Muestra muestra = new Muestra(i, valorMuestra);
 
-                señalSenoidal.Muestras.Add(muestra);
+                señal.Muestras.Add(muestra);
             }
 
-            foreach(Muestra muestra in señalSenoidal.Muestras)
+            foreach(Muestra muestra in señal.Muestras)
             {
                 plnGrafica.Points.Add(adaptarCoordenadas(muestra.X, muestra.Y, tiempoInicial, amplitudMaxima));
             }

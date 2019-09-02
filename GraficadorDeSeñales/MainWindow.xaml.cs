@@ -39,7 +39,9 @@ namespace GraficadorDeSeñales
             SeñalSenoidal señal = new SeñalSenoidal(amplitud, fase, frecuencia);
             */
 
-            SeñalParabolica señal = new SeñalParabolica();
+            // SeñalParabolica señal = new SeñalParabolica();
+
+            SeñalSigno señal = new SeñalSigno();
 
             double periodoMuestreo = 1.0 / frecuenciaDeMuestreo;
 

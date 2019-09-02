@@ -23,7 +23,7 @@
             <Grid>
                 <Polyline Stroke="CornflowerBlue" StrokeThickness="2" Name="plnGrafica"/>
                 <Polyline Stroke="Black" StrokeThickness="1" Name="plnEjeX" />
-                <Polyline Stroke="RoyalBlue" StrokeThickness="2" Name="plnEjeY"/>
+                <Polyline Stroke="SandyBrown" StrokeThickness="2" Name="plnEjeY"/>
             </Grid>
         </ScrollViewer>
         <TextBlock HorizontalAlignment="Left" Margin="163,127,0,0" TextWrapping="Wrap" Text="Frecuencia de muestreo:" VerticalAlignment="Top"/>

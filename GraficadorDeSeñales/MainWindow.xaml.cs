@@ -28,9 +28,9 @@ namespace GraficadorDeSeñales
 
         private void BtnGraficar_Click(object sender, RoutedEventArgs e)
         {
-            double amplitud = double.Parse(txtAmplitud.Text);
+            /*double amplitud = double.Parse(txtAmplitud.Text);
             double fase = double.Parse(txtFase.Text);
-            double frecuencia = double.Parse(txtFrecuencia.Text);
+            double frecuencia = double.Parse(txtFrecuencia.Text);*/
             double tiempoInicial = double.Parse(txtTiempoInicial.Text);
             double tiempoFinal = double.Parse(txtTiempoFinal.Text);
             double frecuenciaDeMuestreo = double.Parse(txtFrecuenciaDeMuestreo.Text);
@@ -39,9 +39,9 @@ namespace GraficadorDeSeñales
             SeñalSenoidal señal = new SeñalSenoidal(amplitud, fase, frecuencia);
             */
 
-            // SeñalParabolica señal = new SeñalParabolica();
+            SeñalParabolica señal = new SeñalParabolica();
 
-            SeñalSigno señal = new SeñalSigno();
+            // SeñalSigno señal = new SeñalSigno();
 
             double periodoMuestreo = 1.0 / frecuenciaDeMuestreo;
 
@@ -87,6 +87,20 @@ namespace GraficadorDeSeñales
         public Point adaptarCoordenadas(double x, double y, double tiempoInicial, double amplitudMaxima)
         {
             return new Point((x - tiempoInicial) * scrGrafica.Width, -1 * ( y * ( ( ( ( scrGrafica.Height ) / 2.0) - 25) / amplitudMaxima) ) + ( scrGrafica.Height / 2.0 ) );
+        }
+
+        private void CbTipoSeñal_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            panelConfiguracion.Children.Clear();
+            switch(cbTipoSeñal.SelectedIndex){
+                case 0: //Parabólica
+                    break;
+                case 1: //Senoidal
+                    panelConfiguracion.Children.Add(new ConfiguracionSeñalSenoidal());
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

@@ -36,9 +36,7 @@ namespace GraficadorDeSeñales
         {
             double resultado;
             resultado =
-                Amplitud * Math.Sin(
-                    ((2 * Math.PI * Frecuencia) *
-                    tiempo) + Fase);
+                Amplitud * Math.Sin( ( ( 2 * Math.PI * Frecuencia ) * tiempo) + Fase);
             return resultado;
         }
     }

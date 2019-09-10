@@ -23,7 +23,7 @@ namespace GraficadorDeSeñales
 
             Muestras.Clear();
 
-            for(double i = TiempoInicial; i <= TiempoFinal; i+= FrecuenciaDeMuestreo)
+            for(double i = TiempoInicial; i <= TiempoFinal; i+= periodoMuestreo)
             {
                 double muestra = evaluar(i);
 

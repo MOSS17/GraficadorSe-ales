@@ -27,8 +27,9 @@
         <TextBlock HorizontalAlignment="Left" Margin="9,281,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" TextAlignment="Right" Width="153"/>
         <Grid x:Name="panelConfiguracion" HorizontalAlignment="Left" Height="259" Margin="10,58,0,0" VerticalAlignment="Top" Width="144"/>
         <ComboBox x:Name="cbTipoSeñal" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Width="148" SelectedIndex="0" SelectionChanged="CbTipoSeñal_SelectionChanged">
-            <ComboBoxItem>Señal Exponencial</ComboBoxItem>
+            <ComboBoxItem>Señal Parabolica</ComboBoxItem>
             <ComboBoxItem>Señal Senoidal</ComboBoxItem>
+            <ComboBoxItem>Señal Exponencial</ComboBoxItem>
         </ComboBox>
        
     </Grid>

@@ -35,8 +35,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NAudio, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.9.0\lib\net35\NAudio.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,6 +60,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ConfiguracionAudio.xaml.cs">
+      <DependentUpon>ConfiguracionAudio.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ConfiguracionSeñalExponencial.xaml.cs">
       <DependentUpon>ConfiguracionSeñalExponencial.xaml</DependentUpon>
     </Compile>
@@ -63,10 +71,15 @@
     </Compile>
     <Compile Include="Muestra.cs" />
     <Compile Include="Señal.cs" />
+    <Compile Include="SeñalAudio.cs" />
     <Compile Include="SeñalExponencial.cs" />
     <Compile Include="SeñalParabolica.cs" />
     <Compile Include="SeñalSenoidal.cs" />
     <Compile Include="SeñalSigno.cs" />
+    <Page Include="ConfiguracionAudio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ConfiguracionSeñalExponencial.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -106,6 +119,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -113,6 +127,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SonidoSinusoidal.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

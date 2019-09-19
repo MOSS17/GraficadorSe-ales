@@ -53,8 +53,7 @@ namespace GraficadorDeSeñales
                     señal = new SeñalSenoidal(amplitud, fase, frecuencia);
                     break;
                 case 2: // Exponencial
-                    double alfa =
-                        double.Parse(((ConfiguracionSeñalExponencial)(panelConfiguracion.Children[0])).txtAlfa.Text);
+                    double alfa = double.Parse(((ConfiguracionSeñalExponencial)(panelConfiguracion.Children[0])).txtAlfa.Text);
                     señal = new SeñalExponencial(alfa);
                     break;
                 case 3: // Audio

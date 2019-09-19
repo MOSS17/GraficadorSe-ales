@@ -14,11 +14,12 @@ namespace GraficadorDeSeñales
 
         public SeñalAudio( string rutaArchivo )
         {
-            rutaArchivo = RutaArchivo;
+            RutaArchivo = rutaArchivo;
             Muestras = new List<Muestra>();
             AmplitudMaxima = 0.0;
 
-            AudioFileReader reader = new AudioFileReader(rutaArchivo);
+            AudioFileReader reader =
+                new AudioFileReader(rutaArchivo);
 
             TiempoInicial = 0.0;
             TiempoFinal = reader.TotalTime.TotalSeconds;

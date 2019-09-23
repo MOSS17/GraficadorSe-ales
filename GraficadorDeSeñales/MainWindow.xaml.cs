@@ -36,6 +36,7 @@ namespace GraficadorDeSeñales
             double frecuenciaDeMuestreo = double.Parse(txtFrecuenciaDeMuestreo.Text);
 
             Señal señal;
+            Señal señalResultante;
 
             switch (cbTipoSeñal.SelectedIndex)
             {
@@ -77,18 +78,40 @@ namespace GraficadorDeSeñales
                 señal.construirSeñal();
             }
 
-            double amplitudMaxima = señal.AmplitudMaxima;
+            switch (cbOperacion.SelectedIndex)
+            {
+                case 0: //Escala de amplitud
+                    double factorEscala = double.Parse(((OperacionEscalaAmplitud)(panelConfiguracionOperacion.Children[0])).txtFactorEscala.Text);
+                    señalResultante = Señal.escalarAmplitud(señal, factorEscala);
+                    break;
+                default:
+                    señalResultante = null;
+                    break;
+            }
 
+            double amplitudMaxima = señal.AmplitudMaxima;
+            double amplitudMaximaResultado = señalResultante.AmplitudMaxima;
+
+            plnGraficaResultante.Points.Clear();
             plnGrafica.Points.Clear();
 
             foreach (Muestra muestra in señal.Muestras)
             {
                 plnGrafica.Points.Add(adaptarCoordenadas(muestra.X, muestra.Y, tiempoInicial, amplitudMaxima));
             }
+            
+            foreach(Muestra muestra in señalResultante.Muestras)
+            {
+                plnGraficaResultante.Points.Add(adaptarCoordenadas(muestra.X, muestra.Y, tiempoInicial, amplitudMaximaResultado));
+            }
 
-            lblLimiteSuperior.Text = amplitudMaxima.ToString();
-            lblLimiteInferior.Text = (-amplitudMaxima).ToString();
+            lblLimiteSuperior.Text = amplitudMaxima.ToString("F");
+            lblLimiteInferior.Text = (-amplitudMaxima).ToString("F");
 
+            lblLimiteInferiorResultante.Text = amplitudMaximaResultado.ToString("F");
+            lblLimiteSuperiorResultante.Text = amplitudMaximaResultado.ToString("F");
+
+            //Original
             plnEjeX.Points.Clear();
             plnEjeX.Points.Add(
                 adaptarCoordenadas(tiempoInicial, 0.0, tiempoInicial, amplitudMaxima)
@@ -100,6 +123,15 @@ namespace GraficadorDeSeñales
             plnEjeY.Points.Clear();
             plnEjeY.Points.Add(adaptarCoordenadas(0.0, -amplitudMaxima, tiempoInicial, amplitudMaxima));
             plnEjeY.Points.Add(adaptarCoordenadas(0.0, amplitudMaxima, tiempoInicial, amplitudMaxima));
+
+            //Resultado
+            plnEjeXResultante.Points.Clear();
+            plnEjeXResultante.Points.Add(adaptarCoordenadas(tiempoInicial, 0.0, tiempoInicial, amplitudMaximaResultado));
+            plnEjeXResultante.Points.Add(adaptarCoordenadas(tiempoFinal, 0.0, tiempoInicial, amplitudMaximaResultado));
+
+            plnEjeYResultante.Points.Clear();
+            plnEjeYResultante.Points.Add(adaptarCoordenadas(0.0, amplitudMaximaResultado, tiempoInicial, amplitudMaximaResultado));
+            plnEjeYResultante.Points.Add(adaptarCoordenadas(0.0, -amplitudMaximaResultado, tiempoInicial, amplitudMaximaResultado));
         }
 
         public Point adaptarCoordenadas(double x, double y, double tiempoInicial, double amplitudMaxima)
@@ -121,6 +153,18 @@ namespace GraficadorDeSeñales
                     break;
                 case 3:
                     panelConfiguracion.Children.Add(new ConfiguracionAudio());
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void CbOperacion_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            panelConfiguracionOperacion.Children.Clear();
+            switch(cbOperacion.SelectedIndex){
+                case 0: //Escala de Amplitud
+                    panelConfiguracionOperacion.Children.Add(new OperacionEscalaAmplitud());
                     break;
                 default:
                     break;

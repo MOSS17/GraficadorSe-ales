@@ -84,13 +84,18 @@ namespace GraficadorDeSeñales
                     double factorEscala = double.Parse(((OperacionEscalaAmplitud)(panelConfiguracionOperacion.Children[0])).txtFactorEscala.Text);
                     señalResultante = Señal.escalarAmplitud(señal, factorEscala);
                     break;
+                case 1: //Desplazamiento de amplitud
+                    double cantidadDesplazamiento = double.Parse(((OperacionDesplazamientoAmplitud)(panelConfiguracionOperacion.Children[0])).txtCantidadDesplazamiento.Text);
+                    señalResultante = Señal.desplazarAmplitud(señal, cantidadDesplazamiento);
+                    break;
                 default:
                     señalResultante = null;
                     break;
             }
 
-            double amplitudMaxima = señal.AmplitudMaxima;
-            double amplitudMaximaResultado = señalResultante.AmplitudMaxima;
+            double amplitudMaxima = 
+                (señal.AmplitudMaxima >= señalResultante.AmplitudMaxima) 
+                ? señal.AmplitudMaxima : señalResultante.AmplitudMaxima;
 
             plnGraficaResultante.Points.Clear();
             plnGrafica.Points.Clear();
@@ -99,17 +104,17 @@ namespace GraficadorDeSeñales
             {
                 plnGrafica.Points.Add(adaptarCoordenadas(muestra.X, muestra.Y, tiempoInicial, amplitudMaxima));
             }
-            
-            foreach(Muestra muestra in señalResultante.Muestras)
+
+            foreach (Muestra muestra in señalResultante.Muestras)
             {
-                plnGraficaResultante.Points.Add(adaptarCoordenadas(muestra.X, muestra.Y, tiempoInicial, amplitudMaximaResultado));
+                plnGraficaResultante.Points.Add(adaptarCoordenadas(muestra.X, muestra.Y, tiempoInicial, amplitudMaxima));
             }
 
-            lblLimiteSuperior.Text = amplitudMaxima.ToString("F");
-            lblLimiteInferior.Text = (-amplitudMaxima).ToString("F");
+                lblLimiteSuperior.Text = amplitudMaxima.ToString("F");
+                lblLimiteInferior.Text = "-" + amplitudMaxima.ToString("F");
 
-            lblLimiteInferiorResultante.Text = amplitudMaximaResultado.ToString("F");
-            lblLimiteSuperiorResultante.Text = amplitudMaximaResultado.ToString("F");
+                lblLimiteInferiorResultante.Text = "-" + amplitudMaxima.ToString("F");
+                lblLimiteSuperiorResultante.Text = amplitudMaxima.ToString("F");
 
             //Original
             plnEjeX.Points.Clear();
@@ -126,12 +131,12 @@ namespace GraficadorDeSeñales
 
             //Resultado
             plnEjeXResultante.Points.Clear();
-            plnEjeXResultante.Points.Add(adaptarCoordenadas(tiempoInicial, 0.0, tiempoInicial, amplitudMaximaResultado));
-            plnEjeXResultante.Points.Add(adaptarCoordenadas(tiempoFinal, 0.0, tiempoInicial, amplitudMaximaResultado));
+            plnEjeXResultante.Points.Add(adaptarCoordenadas(tiempoInicial, 0.0, tiempoInicial, amplitudMaxima));
+            plnEjeXResultante.Points.Add(adaptarCoordenadas(tiempoFinal, 0.0, tiempoInicial, amplitudMaxima));
 
             plnEjeYResultante.Points.Clear();
-            plnEjeYResultante.Points.Add(adaptarCoordenadas(0.0, amplitudMaximaResultado, tiempoInicial, amplitudMaximaResultado));
-            plnEjeYResultante.Points.Add(adaptarCoordenadas(0.0, -amplitudMaximaResultado, tiempoInicial, amplitudMaximaResultado));
+            plnEjeYResultante.Points.Add(adaptarCoordenadas(0.0, amplitudMaxima, tiempoInicial, amplitudMaxima));
+            plnEjeYResultante.Points.Add(adaptarCoordenadas(0.0, -amplitudMaxima, tiempoInicial, amplitudMaxima));
         }
 
         public Point adaptarCoordenadas(double x, double y, double tiempoInicial, double amplitudMaxima)
@@ -165,6 +170,9 @@ namespace GraficadorDeSeñales
             switch(cbOperacion.SelectedIndex){
                 case 0: //Escala de Amplitud
                     panelConfiguracionOperacion.Children.Add(new OperacionEscalaAmplitud());
+                    break;
+                case 1: //Cantidad de Desplazamiento
+                    panelConfiguracionOperacion.Children.Add(new OperacionDesplazamientoAmplitud());
                     break;
                 default:
                     break;

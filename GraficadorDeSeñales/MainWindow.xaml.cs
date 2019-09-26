@@ -23,7 +23,7 @@ namespace GraficadorDeSeñales
         public MainWindow()
         {
             InitializeComponent();
-
+            mostrarSegundaSeñal(false);
         }
 
         private void BtnGraficar_Click(object sender, RoutedEventArgs e)
@@ -156,7 +156,7 @@ namespace GraficadorDeSeñales
                 case 2: //Exponencial
                     panelConfiguracion.Children.Add(new ConfiguracionSeñalExponencial());
                     break;
-                case 3:
+                case 3: //Audio
                     panelConfiguracion.Children.Add(new ConfiguracionAudio());
                     break;
                 default:
@@ -166,6 +166,7 @@ namespace GraficadorDeSeñales
 
         private void CbOperacion_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            mostrarSegundaSeñal(false);
             panelConfiguracionOperacion.Children.Clear();
             switch(cbOperacion.SelectedIndex){
                 case 0: //Escala de Amplitud
@@ -174,8 +175,48 @@ namespace GraficadorDeSeñales
                 case 1: //Cantidad de Desplazamiento
                     panelConfiguracionOperacion.Children.Add(new OperacionDesplazamientoAmplitud());
                     break;
+                case 2: //Multiplicación de Señales
+                    mostrarSegundaSeñal(true);
+                    break;
                 default:
                     break;
+            }
+        }
+
+        private void CbTipoSeñal_2_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            panelConfiguracion_2.Children.Clear();
+            switch (cbTipoSeñal_2.SelectedIndex)
+            {
+                case 0: //Parabólica
+                    break;
+                case 1: //Senoidal
+                    panelConfiguracion_2.Children.Add(new ConfiguracionSeñalSenoidal());
+                    break;
+                case 2: //Exponencial
+                    panelConfiguracion_2.Children.Add(new ConfiguracionSeñalExponencial());
+                    break;
+                case 3: //Audio
+                    panelConfiguracion_2.Children.Add(new ConfiguracionAudio());
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
+        void mostrarSegundaSeñal(bool mostrar)
+        {
+            if (mostrar)
+            {
+                lblTipoSeñal_2.Visibility = Visibility.Visible;
+                cbTipoSeñal_2.Visibility = Visibility.Visible;
+                panelConfiguracion_2.Visibility = Visibility.Visible;
+            } else
+            {
+                lblTipoSeñal_2.Visibility = Visibility.Hidden;
+                cbTipoSeñal_2.Visibility = Visibility.Hidden;
+                panelConfiguracion_2.Visibility = Visibility.Hidden;
             }
         }
     }

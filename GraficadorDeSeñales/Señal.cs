@@ -36,6 +36,28 @@ namespace GraficadorDeSeñales
             }
         }
 
+        public static Señal escalaExponencial( Señal señalOriginal, double exponente)
+        {
+            SeñalResultante resultado = new SeñalResultante();
+
+            resultado.TiempoInicial = señalOriginal.TiempoInicial;
+            resultado.TiempoFinal = señalOriginal.TiempoFinal;
+            resultado.FrecuenciaDeMuestreo = señalOriginal.FrecuenciaDeMuestreo;
+
+            foreach (var muestra in señalOriginal.Muestras){
+                double nuevoValor = Math.Pow(muestra.Y, exponente);
+
+                resultado.Muestras.Add(new Muestra(muestra.X, nuevoValor));
+
+                if (Math.Abs(nuevoValor) > resultado.AmplitudMaxima)
+                {
+                    resultado.AmplitudMaxima = Math.Abs(nuevoValor);
+                }
+            }
+
+            return resultado;
+        }
+
         public static Señal escalarAmplitud( Señal señalOriginal, double factorEscala)
         {
             SeñalResultante resultado = new SeñalResultante();

@@ -47,6 +47,7 @@
             <ComboBoxItem>Escala de Amplitud</ComboBoxItem>
             <ComboBoxItem>Desplazamiento de Amplitud</ComboBoxItem>
             <ComboBoxItem>Multiplicación de Señales</ComboBoxItem>
+            <ComboBoxItem>Escala Exponencial</ComboBoxItem>
         </ComboBox>
         <Grid x:Name="panelConfiguracionOperacion" HorizontalAlignment="Left" Height="135" Margin="300,31,0,0" VerticalAlignment="Top" Width="220">
 

@@ -32,6 +32,7 @@
             <ComboBoxItem>Señal Senoidal</ComboBoxItem>
             <ComboBoxItem>Señal Exponencial</ComboBoxItem>
             <ComboBoxItem>Señal Audio</ComboBoxItem>
+            <ComboBoxItem>Transformada de Fourier</ComboBoxItem>
         </ComboBox>
         <ScrollViewer x:Name="scrGraficaResultante" HorizontalAlignment="Left" Height="200" Margin="163,418,0,0" VerticalAlignment="Top" Width="619" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Auto">
             <Grid>

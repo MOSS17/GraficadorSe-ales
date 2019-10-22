@@ -13,7 +13,6 @@ namespace GraficadorDeSeñales
         public double TiempoInicial { get; set; }
         public double TiempoFinal { get; set; }
         public double FrecuenciaDeMuestreo { get; set; }
-
         public double AmplitudMaxima { get; set; }
 
         public abstract double evaluar(double tiempo);
@@ -56,6 +55,10 @@ namespace GraficadorDeSeñales
                     señal.Muestras[k].X,
                     muestra.Magnitude
                     ));
+                if (Math.Abs(muestra.Magnitude) > señal.AmplitudMaxima)
+                {
+                    señal.AmplitudMaxima = Math.Abs(muestra.Magnitude);
+                }
             }
 
             return resultado;

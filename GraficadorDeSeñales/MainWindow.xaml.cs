@@ -139,6 +139,9 @@ namespace GraficadorDeSeñales
                     double exponente = double.Parse(((OperacionEscalaEsponencial)(panelConfiguracionOperacion.Children[0])).txtExponente.Text);
                     señalResultante = Señal.escalaExponencial(señal, exponente);
                     break;
+                case 4: //Transformada de fourier
+                    señalResultante = Señal.transformadaFourier(señal);
+                    break;
                 default:
                     señalResultante = null;
                     break;
@@ -177,11 +180,27 @@ namespace GraficadorDeSeñales
                 plnGraficaResultante.Points.Add(adaptarCoordenadas(muestra.X, muestra.Y, tiempoInicial, amplitudMaxima));
             }
 
-                lblLimiteSuperior.Text = amplitudMaxima.ToString("F");
-                lblLimiteInferior.Text = "-" + amplitudMaxima.ToString("F");
+            if(cbOperacion.SelectedIndex == 4)
+            {
+                int indiceMaximo = 0;
 
-                lblLimiteInferiorResultante.Text = "-" + amplitudMaxima.ToString("F");
-                lblLimiteSuperiorResultante.Text = amplitudMaxima.ToString("F");
+                for(int i=0; i < señalResultante.Muestras.Count/2; i++)
+                {
+                    if (señalResultante.Muestras[i].Y > señalResultante.Muestras[indiceMaximo].Y)
+                    {
+                        indiceMaximo = i;
+                    }
+                }
+
+                double frecuencia = (double)(indiceMaximo * señalResultante.FrecuenciaDeMuestreo) / (double)señalResultante.Muestras.Count;
+                lblHertz.Text = frecuencia.ToString("N") + " Hz";
+            }
+
+            lblLimiteSuperior.Text = amplitudMaxima.ToString("F");
+            lblLimiteInferior.Text = "-" + amplitudMaxima.ToString("F");
+
+            lblLimiteInferiorResultante.Text = "-" + amplitudMaxima.ToString("F");
+            lblLimiteSuperiorResultante.Text = amplitudMaxima.ToString("F");
 
             //Original
             plnEjeX.Points.Clear();
